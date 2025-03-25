@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Dow Linko</title>
+    <meta name="author" content="Rauzi">
+    <meta name="keywords" content="Download, Rauzi, YouTube, скачать видео с ютуба, Раузи, скачать видео">
+    <meta name="description" content="На этом сайте ты сможешь скачать видео из Ютуба">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Заголовок "Dow Linko" в левом верхнем углу */
+        .site-title {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 42px;
+            color: green;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .content {
+            margin-top: 80px;
+        }
+
+        /* Кнопки соц. сетей */
+        .social-btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: green;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            background-color: darkgreen;
+        }
+
+        /* Поле ввода */
+        .input-container {
+            margin-top: 20px;
+        }
+
+        input {
+            width: 350px;
+            padding: 12px;
+            font-size: 18px;
+            border: 3px solid darkgreen;
+            border-radius: 5px;
+            outline: none;
+            text-align: center;
+        }
+
+        /* Кнопка "Готово" */
+        .download-btn {
+            margin-top: 10px;
+            padding: 12px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            background-color: green;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: darkgreen;
+        }
+
+        /* Контейнер для видео */
+        #video-container {
+            margin-top: 20px;
+        }
+
+        iframe {
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Блок кнопок загрузки */
+        #download-options {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .download-option {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            background-color: green;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .download-option:hover {
+            background-color: darkgreen;
+        }
+.banner {
+    background-color: #4CAF50;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.banner h2 {
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+}
+
+    </style>
+</head>
+<body>
+
+    <h1 class="site-title">Dow Linko</h1>
+
+    <div class="content">
+        <!-- Кнопки соц. сетей -->
+		<div class="banner">
+    <h2>Creator "Rauzi"</h2>
+</div>
+        <a href="https://www.tiktok.com/@rauzik_?_t=ZM-8uvpiIMTw6Z&_r=1" target="_blank" class="social-btn">
+            TikTok
+        </a>
+        <a href="mailto:traffikstt777@gmail.com" class="social-btn">
+            Gmail
+        </a>
+        <a href="https://web.telegram.org/a/#6320067307" target="_blank" class="social-btn">
+            Telegram
+        </a>
+
+        <br><br>
+
+        <h1>Скачать видео</h1>
+
+        <!-- Поле ввода и кнопка -->
+        <div class="input-container">
+            <input type="text" id="video-link" placeholder="Введите ссылку">
+            <button class="download-btn">Готово</button>
+        </div>
+
+        <h4>Используя наш сервис, вы даете соглашение<br> 
+            с <a href="C:\Users\ASUS\OneDrive\Робочий стіл\register.html" target="_blank">политикой конфиденциальности</a>
+        </h4>
+
+        <!-- Контейнер для вставки видео -->
+        <div id="video-container"></div>
+
+        <!-- Кнопки скачивания видео -->
+        <div id="download-options">
+            <button class="download-option" data-quality="720p">Скачать 720p</button>
+            <button class="download-option" data-quality="480p">Скачать 480p</button>
+            <button class="download-option" data-quality="240p">Скачать 240p</button>
+        </div>
+    </div>
+
+    <script>
+    document.querySelector('.download-btn').addEventListener('click', function() {
+        let input = document.querySelector('#video-link').value;
+        let videoContainer = document.getElementById('video-container');
+        let downloadOptions = document.getElementById('download-options');
+        videoContainer.innerHTML = ''; // Очищаем контейнер перед добавлением нового видео
+        downloadOptions.style.display = 'none';
+
+        if (input.includes("youtube.com") || input.includes("youtu.be")) {
+            let videoId = "";
+
+            try {
+                let url = new URL(input);
+                if (url.hostname.includes("youtube.com")) {
+                    videoId = url.searchParams.get("v");
+                } else if (url.hostname.includes("youtu.be")) {
+                    videoId = url.pathname.substring(1);
+                }
+            } catch (e) {
+                alert("Введите корректную ссылку на YouTube видео.");
+                return;
+            }
+
+            if (videoId) {
+                let videoFrame = document.createElement('iframe');
+                videoFrame.src = `https://www.youtube.com/embed/${videoId}`;
+                videoFrame.width = "560";
+                videoFrame.height = "315";
+                videoFrame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                videoFrame.allowFullscreen = true;
+                videoContainer.appendChild(videoFrame);
+
+                // Показываем кнопки скачивания
+                downloadOptions.style.display = 'block';
+
+                // Добавляем обработчик нажатия на кнопки скачивания
+                document.querySelectorAll('.download-option').forEach(button => {
+                    button.onclick = function() {
+                        let quality = this.getAttribute('data-quality');
+                        let downloadUrl = `https://www.y2mate.com/youtube/${videoId}`;
+
+                        // Открываем страницу скачивания на y2mate в новой вкладке
+                        window.open(downloadUrl, '_blank');
+                    };
+                });
+            } else {
+                alert("Не удалось определить видео.");
+            }
+        } else {
+            alert("Введите корректную ссылку на YouTube видео.");
+        }
+    });
+</script>
+
+
+</body>
+</html>
